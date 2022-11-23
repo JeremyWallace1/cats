@@ -6,15 +6,14 @@ const breedDetailsFromFile = function(breed, functionToRunWhenThingsAreDone) {
   fs.readFile(`./data/${breed}.txt`, 'utf8', (error, data) => {
     console.log("In readFile's Callback: it has the data.");
     // CHANGE: Pass data into callback instead of returning it directly
-    if (!error) functionToRunWhenThingsAreDone(data);
+    if (!error) {
+      functionToRunWhenThingsAreDone(data);
+    } else {
+      functionToRunWhenThingsAreDone(undefined);
+    }
   });
 };
 
-const printOutCatBreed = breed => {
-  console.log('Return Value: ', breed);
-};
-
-breedDetailsFromFile('Bombay', printOutCatBreed);
 
 /* order of operations
 1) require fs
@@ -30,3 +29,5 @@ breedDetailsFromFile('Bombay', printOutCatBreed);
 6) run printOutCatBreed
     console.log return value breed
 */
+
+module.exports = breedDetailsFromFile;
